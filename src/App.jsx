@@ -34,6 +34,12 @@ import {
   UtensilsCrossed,
   Users,
   Briefcase,
+  Network,
+  Server,
+  Cpu,
+  Layers,
+  Wifi,
+  Lightbulb,
 } from "lucide-react"
 
 import IntroOverlay from "./components/IntroOverlay.jsx"
@@ -105,7 +111,7 @@ function Navbar() {
   const [open, setOpen] = useState(false)
   const items = [
     { label: "Veja em ação", href: "#showcase" },
-    { label: "Benefícios", href: "#beneficios" },
+    { label: "Modelo MVNO", href: "#mvno" },
     { label: "Para quem é", href: "#segmentos" },
     { label: "Planos", href: "#planos" },
     { label: "FAQ", href: "#faq" },
@@ -537,6 +543,169 @@ function WhyChoose() {
             </div>
           </motion.div>
         ))}
+      </motion.div>
+    </Section>
+  )
+}
+
+/* --------------------------- ABOUT MVNO --------------------------- */
+function AboutMVNO() {
+  const pillars = [
+    {
+      icon: Server,
+      title: "Infraestrutura premium",
+      desc: "Operamos em cima de uma rede robusta e estável, garantindo qualidade de transmissão em escala.",
+    },
+    {
+      icon: Lightbulb,
+      title: "Foco total no cliente",
+      desc: "Sem amarras de operadora gigante: atendimento próximo, decisões rápidas e produto pensado para você.",
+    },
+    {
+      icon: Layers,
+      title: "Mais flexibilidade",
+      desc: "Planos sob medida para residências, empresas e estabelecimentos — sem burocracia de operadora tradicional.",
+    },
+    {
+      icon: Cpu,
+      title: "Preço competitivo",
+      desc: "Estrutura enxuta e tecnologia eficiente nos permitem entregar mais entretenimento por menos.",
+    },
+  ]
+
+  return (
+    <Section id="mvno" className="relative">
+      <div className="absolute -left-32 top-1/3 -z-10 h-72 w-[500px] rounded-full bg-brand-neon/15 blur-[140px]" />
+      <div className="absolute -right-32 bottom-1/4 -z-10 h-72 w-[500px] rounded-full bg-brand-orange/15 blur-[140px]" />
+
+      <SectionTitle
+        eyebrow="Modelo de negócio"
+        icon={Network}
+        title="O que é uma empresa MVNO?"
+        subtitle="MVNO (Mobile Virtual Network Operator) é uma operadora virtual que utiliza a infraestrutura de redes consagradas para entregar serviços de telecomunicações com identidade, agilidade e foco próprios."
+      />
+
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+        {/* Definition card */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="glass-strong relative overflow-hidden rounded-3xl p-8 lg:col-span-5"
+        >
+          <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-neon/20 blur-3xl" />
+
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-neon to-brand-deep text-white shadow-glow">
+              <Wifi className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.3em] text-brand-neon">
+                A TV MAIS+ é uma TV MVNO
+              </p>
+              <p className="font-display text-lg font-semibold">Tecnologia + cuidado</p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm leading-relaxed text-white/75 sm:text-base">
+            Como uma <strong className="text-white">TV MVNO</strong>, a TV MAIS+ se apoia em
+            uma infraestrutura de rede de alta performance e dedica toda a sua energia em algo
+            que muitas operadoras gigantes esquecem:{" "}
+            <strong className="text-white">a experiência do cliente</strong>.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/65 sm:text-base">
+            Isso significa atendimento humano, planos pensados para quem realmente assiste, e
+            a possibilidade de evoluir o serviço com agilidade — algo que só um modelo MVNO
+            consegue entregar.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {[
+              "Rede premium",
+              "Operação enxuta",
+              "Atendimento próximo",
+              "Inovação contínua",
+            ].map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/75"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Pillars */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7"
+        >
+          {pillars.map((p) => (
+            <motion.div
+              key={p.title}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              className="glass group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:shadow-glow"
+            >
+              <div
+                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-neon/15 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+                style={{ opacity: 0.4 }}
+              />
+              <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-neon/25 to-brand-deep ring-1 ring-white/10">
+                <p.icon className="h-5 w-5 text-brand-neon" />
+              </div>
+              <h3 className="mt-5 font-display text-base font-semibold text-white sm:text-lg">
+                {p.title}
+              </h3>
+              <p className="mt-1.5 text-sm text-white/65">{p.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Comparison strip */}
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2"
+      >
+        <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-white/45">
+            Operadora tradicional
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-white/55">
+            <li>• Atendimento padrão e burocrático</li>
+            <li>• Pacotes engessados</li>
+            <li>• Decisões lentas</li>
+            <li>• Foco em volume, não em pessoas</li>
+          </ul>
+        </div>
+        <div
+          className="relative rounded-3xl p-6"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(0,123,255,0.12), rgba(255,90,0,0.08))",
+            border: "1px solid rgba(0,123,255,0.25)",
+            boxShadow: "0 0 40px rgba(0,123,255,0.18)",
+          }}
+        >
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-brand-yellow">
+            TV MAIS+ (MVNO)
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-white/85">
+            <li>✓ Atendimento humano e ágil via WhatsApp/Telegram</li>
+            <li>✓ Planos sob medida (residência, empresa, condomínio, bar)</li>
+            <li>✓ Ativação imediata e suporte rápido</li>
+            <li>✓ Cliente sempre em primeiro lugar</li>
+          </ul>
+        </div>
       </motion.div>
     </Section>
   )
@@ -1299,6 +1468,7 @@ export default function App() {
         <VideoShowcase />
         <Benefits />
         <WhyChoose />
+        <AboutMVNO />
         <Segments />
         <Plans />
         <Devices />
