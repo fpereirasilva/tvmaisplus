@@ -8,7 +8,14 @@
       "Bash(npm run *)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git -c user.email=fabiosilva@fabiosilva.com.br -c 'user.name=Fabio Silva' commit -m 'feat: TV MAIS+ premium landing page *)"
+      "Bash(git -c user.email=fabiosilva@fabiosilva.com.br -c 'user.name=Fabio Silva' commit -m 'feat: TV MAIS+ premium landing page *)",
+      "Bash(gh repo *)",
+      "Bash(vercel --yes --prod --name tvmaisplus)",
+      "Bash(curl -sI https://tvmaisplus.vercel.app)",
+      "Bash(git -c user.email=fabiosilva@fabiosilva.com.br -c 'user.name=Fabio Silva' commit -m 'fix\\(intro\\): make opening logo fully responsive across devices *)",
+      "Bash(vercel --yes --prod)",
+      "Bash(git -c user.email=fabiosilva@fabiosilva.com.br -c 'user.name=Fabio Silva' commit -m 'feat: add segments section \\(corporate, residential, condos, bars/restaurants\\) *)",
+      "Bash(git -c user.email=fabiosilva@fabiosilva.com.br -c 'user.name=Fabio Silva' commit -m 'feat: add video showcase section with autoplay highlight reel *)"
     ]
   }
 }

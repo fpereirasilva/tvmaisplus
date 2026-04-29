@@ -39,6 +39,7 @@ import {
 import IntroOverlay from "./components/IntroOverlay.jsx"
 import Particles from "./components/Particles.jsx"
 import FloatingButtons from "./components/FloatingButtons.jsx"
+import VideoShowcase from "./components/VideoShowcase.jsx"
 import { LINKS } from "./data.js"
 
 const fadeUp = {
@@ -103,10 +104,10 @@ function SectionTitle({ eyebrow, title, subtitle, icon }) {
 function Navbar() {
   const [open, setOpen] = useState(false)
   const items = [
+    { label: "Veja em ação", href: "#showcase" },
     { label: "Benefícios", href: "#beneficios" },
     { label: "Para quem é", href: "#segmentos" },
     { label: "Planos", href: "#planos" },
-    { label: "Dispositivos", href: "#dispositivos" },
     { label: "FAQ", href: "#faq" },
   ]
   return (
@@ -1295,6 +1296,7 @@ export default function App() {
       <Navbar />
       <main className="relative">
         <Hero />
+        <VideoShowcase />
         <Benefits />
         <WhyChoose />
         <Segments />
