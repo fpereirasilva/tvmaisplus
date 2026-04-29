@@ -28,6 +28,12 @@ import {
   HeartHandshake,
   Rocket,
   Globe2,
+  Building2,
+  Home,
+  Building,
+  UtensilsCrossed,
+  Users,
+  Briefcase,
 } from "lucide-react"
 
 import IntroOverlay from "./components/IntroOverlay.jsx"
@@ -98,7 +104,7 @@ function Navbar() {
   const [open, setOpen] = useState(false)
   const items = [
     { label: "Benefícios", href: "#beneficios" },
-    { label: "Por que TV MAIS+", href: "#por-que" },
+    { label: "Para quem é", href: "#segmentos" },
     { label: "Planos", href: "#planos" },
     { label: "Dispositivos", href: "#dispositivos" },
     { label: "FAQ", href: "#faq" },
@@ -530,6 +536,152 @@ function WhyChoose() {
             </div>
           </motion.div>
         ))}
+      </motion.div>
+    </Section>
+  )
+}
+
+/* --------------------------- SEGMENTS --------------------------- */
+function Segments() {
+  const items = [
+    {
+      icon: Building2,
+      title: "Corporativo",
+      desc: "Solução completa para empresas, escritórios e salas de espera com sinal estável e suporte prioritário.",
+      tags: ["Recepção", "Salas de espera", "Coworking"],
+      gradient: "from-brand-neon to-brand-deep",
+      glow: "rgba(0,123,255,0.45)",
+      whatsappMsg:
+        "Quero%20uma%20proposta%20corporativa%20da%20TV%20MAIS%2B%20para%20minha%20empresa",
+    },
+    {
+      icon: Home,
+      title: "Residencial",
+      desc: "Tudo o que sua família precisa: canais ao vivo, filmes, séries e esportes em qualquer dispositivo da casa.",
+      tags: ["Smart TV", "Celular", "Tablet"],
+      gradient: "from-fuchsia-500 to-brand-deep",
+      glow: "rgba(217,70,239,0.45)",
+      whatsappMsg:
+        "Quero%20o%20plano%20residencial%20da%20TV%20MAIS%2B%20para%20minha%20casa",
+    },
+    {
+      icon: Building,
+      title: "Condomínios",
+      desc: "Pacotes especiais para áreas comuns, salões de festa, academia e portaria — instalação rápida em todo o prédio.",
+      tags: ["Salão de festas", "Academia", "Portaria"],
+      gradient: "from-brand-yellow to-brand-orange",
+      glow: "rgba(255,212,0,0.45)",
+      whatsappMsg:
+        "Quero%20uma%20proposta%20da%20TV%20MAIS%2B%20para%20o%20meu%20condom%C3%ADnio",
+    },
+    {
+      icon: UtensilsCrossed,
+      title: "Bares e Restaurantes",
+      desc: "Atraia mais clientes transmitindo os principais eventos esportivos e canais de entretenimento ao vivo.",
+      tags: ["Esportes ao vivo", "Múltiplas TVs", "Sinal estável"],
+      gradient: "from-brand-orange to-brand-yellow",
+      glow: "rgba(255,90,0,0.45)",
+      whatsappMsg:
+        "Quero%20uma%20proposta%20da%20TV%20MAIS%2B%20para%20meu%20bar%2Frestaurante",
+    },
+  ]
+
+  const buildLink = (msg) => `https://wa.me/5511988746422?text=${msg}`
+
+  return (
+    <Section id="segmentos" className="relative">
+      <div className="absolute right-1/2 top-12 -z-10 h-72 w-[700px] translate-x-1/2 rounded-full bg-brand-orange/10 blur-[140px]" />
+
+      <SectionTitle
+        eyebrow="Para quem é a TV MAIS+"
+        icon={Users}
+        title="Soluções sob medida para cada espaço"
+        subtitle="Da sua sala ao seu negócio, a TV MAIS+ entrega a melhor experiência de entretenimento — com pacotes desenhados para cada perfil."
+      />
+
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {items.map((it) => (
+          <motion.div
+            key={it.title}
+            variants={fadeUp}
+            whileHover={{ y: -8, scale: 1.015 }}
+            className="group relative flex flex-col overflow-hidden rounded-3xl p-7"
+          >
+            <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl" />
+            <div
+              className={`absolute -right-12 -top-12 -z-10 h-40 w-40 rounded-full bg-gradient-to-br ${it.gradient} opacity-25 blur-3xl transition-opacity duration-500 group-hover:opacity-50`}
+            />
+            <div className="absolute inset-0 -z-10 rounded-3xl ring-1 ring-white/10 transition group-hover:ring-white/25" />
+
+            <div
+              className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${it.gradient} text-white shadow-glow`}
+              style={{ boxShadow: `0 10px 30px -8px ${it.glow}` }}
+            >
+              <it.icon className="h-6 w-6" />
+            </div>
+
+            <h3 className="mt-5 font-display text-xl font-semibold">{it.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-white/65">{it.desc}</p>
+
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              {it.tags.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-white/70"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <a
+              href={buildLink(it.whatsappMsg)}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/85 transition group-hover:text-white"
+            >
+              Quero uma proposta
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            </a>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        className="mt-10 flex flex-col items-center justify-center gap-4 rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-6 text-center sm:flex-row sm:justify-between sm:text-left"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-neon to-brand-deep text-white">
+            <Briefcase className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="font-display text-base font-semibold">Atendimento empresarial</p>
+            <p className="text-xs text-white/60">
+              Múltiplas unidades, contrato e nota fiscal — fale com um consultor.
+            </p>
+          </div>
+        </div>
+        <a
+          href={buildLink(
+            "Quero%20falar%20com%20um%20consultor%20empresarial%20da%20TV%20MAIS%2B"
+          )}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-primary"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Falar com consultor
+        </a>
       </motion.div>
     </Section>
   )
@@ -1091,6 +1243,7 @@ function Footer() {
           </h4>
           <ul className="mt-4 space-y-2 text-sm text-white/65">
             <li><a href="#beneficios" className="hover:text-white">Benefícios</a></li>
+            <li><a href="#segmentos" className="hover:text-white">Para empresas e condomínios</a></li>
             <li><a href="#planos" className="hover:text-white">Planos</a></li>
             <li><a href="#dispositivos" className="hover:text-white">Dispositivos</a></li>
             <li><a href="#faq" className="hover:text-white">FAQ</a></li>
@@ -1144,6 +1297,7 @@ export default function App() {
         <Hero />
         <Benefits />
         <WhyChoose />
+        <Segments />
         <Plans />
         <Devices />
         <FreeTrialBanner />
