@@ -78,77 +78,121 @@ export default function VideoShowcase() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto max-w-5xl"
+        className="relative mx-auto flex w-full max-w-[380px] flex-col items-center sm:max-w-[420px]"
       >
-        <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-neon/30 via-transparent to-brand-orange/30 blur-2xl" />
+        <div className="absolute -inset-8 -z-10 rounded-[2.4rem] bg-gradient-to-tr from-brand-neon/35 via-transparent to-brand-orange/35 blur-3xl" />
 
-        <div className="relative overflow-hidden rounded-[1.7rem] p-1 neon-border">
-          <div className="relative overflow-hidden rounded-[1.5rem] bg-brand-black">
-            {!ready && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-brand-deep via-brand-black to-brand-black">
-                <div className="flex flex-col items-center gap-3 text-white/70">
-                  <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-brand-neon" />
-                  <span className="text-xs uppercase tracking-[0.3em]">Carregando</span>
+        {/* Phone-style frame with neon border */}
+        <div className="relative w-full overflow-hidden rounded-[2rem] p-[2px] neon-border">
+          <div className="relative overflow-hidden rounded-[1.85rem] bg-brand-black shadow-card">
+            <div className="relative aspect-[9/16] w-full bg-gradient-to-br from-brand-deep via-brand-black to-brand-black">
+              {!ready && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-br from-brand-deep via-brand-black to-brand-black">
+                  <div className="flex flex-col items-center gap-3 text-white/70">
+                    <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-brand-neon" />
+                    <span className="text-xs uppercase tracking-[0.3em]">Carregando</span>
+                  </div>
                 </div>
+              )}
+              <video
+                ref={videoRef}
+                src="/tvmaisplus-showcase.mp4"
+                poster="/logo.png"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                onCanPlay={() => setReady(true)}
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+
+              {/* Subtle vignette */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+
+              {/* Top brand */}
+              <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-md">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-orange" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-white/85">
+                  Ao vivo
+                </span>
               </div>
-            )}
-            <video
-              ref={videoRef}
-              src="/tvmaisplus-showcase.mp4"
-              poster="/logo.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              onCanPlay={() => setReady(true)}
-              className="block aspect-video w-full object-cover"
-            />
 
-            {/* Subtle vignette */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
-
-            {/* Top brand */}
-            <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur-md">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-brand-orange" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/85">
-                Ao vivo
-              </span>
-            </div>
-
-            {/* Bottom controls */}
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-4 py-3">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={togglePlay}
-                  aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
+              {/* Bottom controls */}
+              <div className="absolute inset-x-0 bottom-0 flex items-center justify-between px-3 py-3">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={togglePlay}
+                    aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25"
+                  >
+                    {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+                  </button>
+                  <button
+                    onClick={toggleMute}
+                    aria-label={muted ? "Ativar som" : "Silenciar"}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25"
+                  >
+                    {muted ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+                  </button>
+                </div>
+                <a
+                  href={LINKS.whatsappTeste}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-semibold text-white backdrop-blur-md transition hover:bg-white/25"
                 >
-                  {playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                </button>
-                <button
-                  onClick={toggleMute}
-                  aria-label={muted ? "Ativar som" : "Silenciar"}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
-                >
-                  {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                </button>
+                  <Sparkles className="h-3 w-3 text-brand-yellow" />
+                  Teste grátis
+                  <ArrowRight className="h-3 w-3" />
+                </a>
               </div>
-              <a
-                href={LINKS.whatsappTeste}
-                target="_blank"
-                rel="noreferrer"
-                className="hidden items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md transition hover:bg-white/20 sm:inline-flex"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-brand-yellow" />
-                Quero teste grátis
-                <ArrowRight className="h-3.5 w-3.5" />
-              </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        {/* Floating side badges (desktop only) */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.7 }}
+          className="pointer-events-none absolute left-0 top-12 hidden -translate-x-[calc(100%+20px)] lg:block"
+        >
+          <div className="glass-strong flex items-center gap-3 rounded-2xl px-3 py-2 shadow-glow">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-neon to-brand-deep text-white">
+              <Sparkles className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-brand-neon">
+                Imagem premium
+              </p>
+              <p className="text-xs font-semibold">Qualidade real</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.55, duration: 0.7 }}
+          className="pointer-events-none absolute right-0 bottom-24 hidden translate-x-[calc(100%+20px)] lg:block"
+        >
+          <div className="glass-strong flex items-center gap-3 rounded-2xl px-3 py-2 shadow-glow-orange">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-orange to-brand-yellow text-brand-black">
+              <Play className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-brand-yellow">
+                Sem travamentos
+              </p>
+              <p className="text-xs font-semibold">Streaming fluido</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="btn-accent">
             <MessageCircle className="h-4 w-4" />
             Quero assinar agora
